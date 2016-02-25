@@ -59,12 +59,24 @@
       <br/>
       <br/>
       <button class="btn btn-success" ng-click="oui()">Oui</button>
-      <button class="btn btn-primary" ng-click="oui()">S'abtenir</button>
+      <button class="btn btn-primary" ng-click="nspp()">S'abtenir</button>
       <button class="btn btn-danger" ng-click="non()">Non</button>
     </div>
     
     <div class="container" ng-hide=affichageFin>
       <h1>Merci d'avoir voté</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <td>Question</td>
+            <td>Vote</td>
+          </tr>
+        </thead>
+        <tr ng-repeat="res in questions">
+          <td>Question {{res.ordre}}</td>
+          <td>{{res.vote}}</td>
+        </tr>
+      </table>
     </div>
     
   </body>
