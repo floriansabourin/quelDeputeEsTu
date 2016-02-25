@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="plunker">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>AngularJS Plunker</title>
+    <link data-require="bootstrap-css@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <link rel="stylesheet" href="style.css" />
+    <script data-require="angular.js@1.0.x" src="https://code.angularjs.org/1.0.8/angular.js" data-semver="1.0.8"></script>
+    <script data-require="bootstrap@3.3.6" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/app.css" />
+  </head>
+
+  <body ng-controller="MainCtrl">
+    <div class="container" ng-hide=connecte>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="main">
+            <div class="row">
+              <div class="col-xs-12 col-sm-6 col-sm-offset-1">
+                <h1>Connexion</h1>
+                  <div class="form-group">
+                    <div class="col-md-8">
+                      <input name="username" placeholder="Idenfiant" class="form-control" type="text" id="UserID" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-8">
+                      <input name="password" placeholder="Mot de passe" class="form-control" type="password" id="UserPassword" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-offset-0 col-md-8">
+                      <button class="btn btn-primary" ng-click="connexion()">Connexion</button>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container" ng-hide=affichageQuiz>
+        {{TabQuestion[i]}} <br>
+        <button class="btn btn-success" ng-click="votePour()">Voter Pour</button>
+        <button class="btn btn-danger" ng-click="voteContre()">Voter Contre</button>
+    </div>
+    
+    <div class="container" ng-hide=FinQuiz>
+        /!\ Score final /!\ <br>
+        Total pour : {{Pour}} <br>
+        Total contre : {{Contre}}
+    </div>
+    
+  </body>
+
+</html>
