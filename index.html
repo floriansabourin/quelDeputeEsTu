@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="plunker">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>AngularJS Plunker</title>
+    <link data-require="bootstrap-css@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <link rel="stylesheet" href="style.css" />
+    <script data-require="angular.js@1.0.x" src="https://code.angularjs.org/1.0.8/angular.js" data-semver="1.0.8"></script>
+    <script data-require="bootstrap@3.3.6" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/app.css" />
+  </head>
+
+  <body ng-controller="MainCtrl">
+    <div class="container" ng-hide=connecte>
+      <br/>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="main">
+            <div class="row">
+              <div class="col-xs-6 col-xs-offset-3">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">Connexion</div>
+                  <div class="panel-body">
+                    <div class="form-group">
+                      <div class="col-xs-12">
+                        <input name="username" placeholder="Idenfiant" class="form-control" type="text" id="UserID" />
+                      </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="form-group">
+                      <div class="col-xs-12">
+                        <input name="password" placeholder="Mot de passe" class="form-control" type="password" id="UserPassword" />
+                      </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="form-group">
+                      <div class="col-xs-offset-3">
+                        <button class="col-xs-6  btn btn-success" ng-click="connexion()">Connexion</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container" ng-hide=affichageQuiz>
+      <h1>Question {{compteur}} :</h1>
+      <br/>
+      {{questions[compteur].question}}
+      <br/>
+      <br/>
+      <button class="btn btn-success" ng-click="oui()">Oui</button>
+      <button class="btn btn-primary" ng-click="oui()">S'abtenir</button>
+      <button class="btn btn-danger" ng-click="non()">Non</button>
+    </div>
+    
+    <div class="container" ng-hide=affichageFin>
+      <h1>Merci d'avoir voté</h1>
+    </div>
+    
+  </body>
+
+</html>
