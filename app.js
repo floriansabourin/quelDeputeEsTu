@@ -40,6 +40,7 @@ app.directive('footerTemplate', function(){
 app.controller('MainCtrl', ['$scope', function ($scope) {
 	
   $scope.UserName = "Pas connecté";
+  $scope.connecte = false;
   $scope.affichageFin = true;
   $scope.compteur = 0;  
   $scope.questions = [
@@ -86,9 +87,9 @@ app.controller('MainCtrl', ['$scope', function ($scope) {
 		  });
 		};
 
-  $scope.majNom = function (name){
-	 $scope.connecte = true;
-	 $scope.UserName = name;	
+  $scope.majConnexion = function (name){	 
+	 $scope.connecte = !$scope.connecte;
+	 $scope.UserName = name;
   }
   
   $scope.oui = function (){
