@@ -15,26 +15,29 @@
     <script src="app.js"></script> 
     <script type="text/javascript">
     function onSignIn(googleUser) {
-    	  var profile = googleUser.getBasicProfile();
-    	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    	  console.log('Name: ' + profile.getName());
-    	  console.log('Image URL: ' + profile.getImageUrl());
-    	  console.log('Email: ' + profile.getEmail());
-    	  document.getElementById('signinButton').setAttribute('style', 'display: none');
-    		var divName = document.getElementById('DivName');
-			var divIdGoogle = document.getElementById('DivIdGoogle');
-			var divEmail = document.getElementById('DivIEmail');
-			var divGivenName = document.getElementById('DivGivenName');
-			var divPicture = document.getElementById('DivPicture');
-			majNam(profile.getName());
+    	var profile = googleUser.getBasicProfile();
+    	console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    	console.log('Name: ' + profile.getName());
+    	console.log('Email: ' + profile.getEmail());
+		console.log("profile name :"+profile.getName());
+		angular.element(document.getElementById('MainCtrl')).scope().majConnexion(profile.getName());		
+		angular.element(document.getElementById('MainCtrl')).scope().$apply();
     	}
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();        
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+          angular.element(document.getElementById('MainCtrl')).scope().majConnexion(profile.getName());		
+  		  angular.element(document.getElementById('MainCtrl')).scope().$apply();
+        });
+     }
 	</script>
     
   </head>  
 
 
 
-  <body ng-controller="MainCtrl">
+  <body ng-controller="MainCtrl" id="MainCtrl">
     
     <div class="navTemplate"></div>
     
@@ -65,6 +68,10 @@
         	</div>
            </div>
          </div>
+       </div>
+       
+       <div class="row" ng-show=connecte>
+       		<h1>Dashboard</h1>
        </div>
       
       <br/>
