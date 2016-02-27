@@ -12,10 +12,29 @@
     <script data-require="jquery@2.2.0" data-semver="2.2.0" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script data-require="bootstrap@3.3.6" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <meta name="google-signin-client_id" content="149865370621-ep07k9i24edon0krf12m34tmvc1naekn.apps.googleusercontent.com">
-    <script src="app.js"></script>  
+    <script src="app.js"></script> 
+    <script type="text/javascript">
+    function onSignIn(googleUser) {
+    	var profile = googleUser.getBasicProfile();
+    	console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    	console.log('Name: ' + profile.getName());
+    	console.log('Email: ' + profile.getEmail());
+		console.log("profile name :"+profile.getName());
+		angular.element(document.getElementById('MainCtrl')).scope().majConnexion(profile.getName());		
+		angular.element(document.getElementById('MainCtrl')).scope().$apply();
+    	}
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();        
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+          angular.element(document.getElementById('MainCtrl')).scope().majConnexion(profile.getName());		
+  		  angular.element(document.getElementById('MainCtrl')).scope().$apply();
+        });
+     }
+	</script> 
   </head>
 
-  <body ng-controller="MainCtrl">
+  <body ng-controller="MainCtrl" id="MainCtrl">
     
     <div class="navTemplate"></div>
     
@@ -32,7 +51,25 @@
             </div>
         </div>
         
-        <div class="container"  ng-hide=affichageVote>
+      <div class="row" ng-hide=connecte>
+        <div class="col-xs-6 col-xs-offset-3">
+          <div class="panel panel-primary">
+            <div class="panel-heading">Authentification requise</div>
+            <div class="panel-body">
+              Identifie toi avec un compte Google.
+              <br/>
+              <br/>
+              <div id="bloc_page" align="center">
+              	<div id="signinButton" class="g-signin2" data-onsuccess="onSignIn"></div>
+              </div>
+        	</div>
+           </div>
+         </div>
+       </div>
+        
+        
+      <div class="row" ng-show=connecte>
+        <div class="row" ng-hide=affichageVote>
           <h3>Loi n°{{compteur+1}} :</h3>
           <br/>
           {{questions[compteur].question}}
@@ -44,7 +81,7 @@
         </div>
         
         
-        <div class="container" ng-hide=affichageFin>
+        <div class="row" ng-hide=affichageFin>
           <h1>Merci d'avoir voté</h1>
           <table class="table">
             <thead>
@@ -59,7 +96,7 @@
             </tr>
           </table>
         </div>
-        
+      </div>
         
         <br/>
         <hr>
