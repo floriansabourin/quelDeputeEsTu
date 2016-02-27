@@ -38,9 +38,10 @@ app.directive('footerTemplate', function(){
 });
 
 app.controller('MainCtrl', ['$scope', function ($scope) {
-  
+	
+  $scope.UserName = "Pas connecté";
   $scope.affichageFin = true;
-  $scope.compteur = 0;
+  $scope.compteur = 0;  
   $scope.questions = [
     {id:"505", ordre:"1",vote: "",question:"Whats your (full) name?"},
     {id:"402", ordre:"2",vote: "",question:"How old are you?"},
@@ -84,6 +85,11 @@ app.controller('MainCtrl', ['$scope', function ($scope) {
 			}
 		  });
 		};
+
+  $scope.majNom = function (name){
+	 $scope.connecte = true;
+	 $scope.UserName = name;	
+  }
   
   $scope.oui = function (){
    $scope.questions[$scope.compteur].vote = "ok";
