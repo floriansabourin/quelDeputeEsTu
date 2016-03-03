@@ -7,6 +7,7 @@
     <link data-require="bootstrap-css@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
     <script>document.write('<base href="' + document.location + '" />');</script>
     <link rel="stylesheet" href="modern-business.css" />
+    <link rel="stylesheet" href="app.css" />
     <script data-require="angular.js@1.0.x" src="https://code.angularjs.org/1.0.8/angular.js" data-semver="1.0.8"></script>
     <script src="https://apis.google.com/js/client:plusone.js" type="text/javascript"></script>
     <script data-require="jquery@2.2.0" data-semver="2.2.0" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -27,7 +28,7 @@
         var auth2 = gapi.auth2.getAuthInstance();        
         auth2.signOut().then(function () {
           console.log('User signed out.');
-          angular.element(document.getElementById('MainCtrl')).scope().majConnexion(profile.getName());		
+          angular.element(document.getElementById('MainCtrl')).scope().majConnexion("Visiteur");		
   		  angular.element(document.getElementById('MainCtrl')).scope().$apply();
         });
      }
@@ -42,24 +43,22 @@
     <div class="navTemplate"></div>
     
     <div class="container">
-
-      <div class="row">
-          <div class="col-lg-12">
-              <h1 class="page">
-                  Bienvenue sur Ni député Ni soumises
-              </h1>
-              <h5 class="page-header"  style="margin: 0px 0px 20px 0px;">
-              	Vote des lois et regarde où tu te situes dans l'hémicycle
-              </h5>
-          </div>
-      </div>
       
+      <!-- page d'authentification -->   
       <div class="row" ng-hide=connecte>
+      	<div class="col-lg-12">
+           <h1 class="page">
+               Authentification
+           </h1>
+           <h5 class="page-header"  style="margin: 0px 0px 20px 0px;">
+           		Une authentification est nécessaire pour poursuivre
+           </h5>
+        </div>      
         <div class="col-xs-6 col-xs-offset-3">
           <div class="panel panel-primary">
-            <div class="panel-heading">Authentification requise</div>
+            <div class="panel-heading">Connexion</div>
             <div class="panel-body">
-              Identifie toi avec un compte Google.
+              Identifie toi avec ton compte Google pour accéder à l'application.
               <br/>
               <br/>
               <div id="bloc_page" align="center">
@@ -71,8 +70,61 @@
        </div>
        
        <div class="row" ng-show=connecte>
-       		<h1>Dashboard</h1>
-       </div>
+         <div class="row" ng-hide=accueil>
+          <div class="col-lg-12">
+              <h1 class="page">
+                  Bienvenue sur Ni député Ni soumises
+              </h1>
+              <h5 class="page-header"  style="margin: 0px 0px 20px 0px;">
+              	Vote des lois et regarde où tu te situes dans l'hémicycle
+              </h5>
+          </div>
+      	 </div>
+         <div class="row" ng-hide=accueil>
+         		<h1>Dashboard</h1>
+         </div>          
+      
+        
+        <div class="row" ng-hide=partieVote>
+          <div class="col-lg-12">
+              <h1 class="page">
+                  T'es de droite ou de gauche ?
+              </h1>
+              <h5 class="page-header"  style="margin: 0px 0px 20px 0px;">
+              	Vote 10 lois pour le savoir
+              </h5>
+          </div>
+        </div>   
+          
+        <div class="row" ng-hide=affichageVote>
+          <h3>Loi n°{{compteur+1}} :</h3>
+          <br/>
+          {{questions[compteur].question}}
+          <br/>
+          <br/>
+          <button class="btn btn-success" ng-click="oui()">Oui</button>
+          <button class="btn btn-primary" ng-click="nspp()">S'abstenir</button>
+          <button class="btn btn-danger" ng-click="non()">Non</button>
+        </div>
+        
+        
+        <div class="row" ng-hide=affichageFin>
+          <h1>Merci d'avoir voté</h1>
+          <table class="table">
+            <thead>
+              <tr>
+                <td>Questions</td>
+                <td>Vote</td>
+              </tr>
+            </thead>
+            <tr ng-repeat="res in questions" class=typeVote>
+              <td>Question {{res.ordre}}</td>
+              <td>{{res.vote}}</td>
+            </tr>
+          </table>
+        </div>
+        
+      </div>
       
       <br/>
       <hr>
