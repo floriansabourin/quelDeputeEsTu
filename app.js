@@ -22,7 +22,7 @@ app.directive('footerTemplate', function(){
 	};
 });
 
-app.controller('MainCtrl', ['$scope', function ($scope) {
+app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 
 	$scope.UserName = "Visiteur";
 	$scope.connecte = false;
@@ -85,7 +85,6 @@ app.controller('MainCtrl', ['$scope', function ($scope) {
 			$scope.accueil = false;
 		}
 		else {
-			$scope.accueil = "Visiteur";
 			$scope.accueil = true;
 			$scope.affichageVote = true;
 			$scope.affichageFin = true;
@@ -146,6 +145,40 @@ app.controller('MainCtrl', ['$scope', function ($scope) {
 		$scope.affichageFin = false;
 	}
 
+	$scope.tabTest = [];
+
+	$scope.test= function(resp){
+		console.log("Methode : test");
+		$scope.tabTest = resp.items;
+		console.log($scope.tabTest);
+	};
+
+	$scope.testAjout = function(resp){
+		console.log("Methode : testAjout");
+		$scope.tabTest.push(resp);
+		console.log($scope.tabTest);
+	};
+
+
+	$window.init = function (){
+		var rootApi = 'https://1-dot-sobike44.appspot.com/_ah/api/';
+		gapi.client.load('scoreentityendpoint', 'v1', function() {
+			console.log("Init : loaded");
+
+			gapi.client.scoreentityendpoint.insertScoreEntity({id:"3333",name:"TeamTrompette55", score:100}).execute(
+					function(resp) {
+						//console.log(resp);
+						$scope.testAjout(resp);
+					});		
+
+			gapi.client.scoreentityendpoint.listScoreEntity().execute(
+					function(resp) {
+						//console.log(resp);
+						$scope.test(resp);
+					});	
+
+		}, rootApi);
+	}
 
 }]);
 
