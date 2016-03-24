@@ -30,6 +30,9 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 	$scope.affichageVote = true;
 	$scope.affichageFin = true;
 	$scope.partieVote = true;
+	
+	$scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+	$scope.data = [300, 500, 100];
 
 	$scope.compteur = 0;  
 	$scope.questions = [
@@ -44,6 +47,31 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 	                    {id:"666", ordre:"9",vote: "",question:"What starsign does that make it?"},
 	                    {id:"999", ordre:"10",vote: "",question:"How tall are you?"}
 	                    ];
+	
+	$window.init = function (){
+		var rootApi = 'https://1-dot-nideputesnisoumises.appspot.com/_ah/api/';
+		gapi.client.load('apindns', 'v1', function() {
+			console.log("Init : loaded");
+			gapi.client.apindns.test().execute(
+					function(resp){
+						console.log("JS : test");
+					}
+			);
+			/*
+			gapi.client.scoreentityendpoint.insertScoreEntity({id:"3333",name:"TeamTrompette55", score:100}).execute(
+					function(resp) {
+						//console.log(resp);
+						$scope.testAjout(resp);
+					});		
+
+			gapi.client.scoreentityendpoint.listScoreEntity().execute(
+					function(resp) {
+						//console.log(resp);
+						$scope.test(resp);
+					});	
+			*/
+		}, rootApi);
+	}
 
 	$scope.fctDeco= function(){
 		console.log("Methode : fctDeco");
@@ -141,6 +169,7 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 
 	$scope.fin = function(){
 		console.log("Methode : fin");
+		$scope.compteur = 0;
 		$scope.affichageVote = true;
 		$scope.affichageFin = false;
 	}
@@ -158,27 +187,6 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 		$scope.tabTest.push(resp);
 		console.log($scope.tabTest);
 	};
-
-
-	$window.init = function (){
-		var rootApi = 'https://1-dot-sobike44.appspot.com/_ah/api/';
-		gapi.client.load('scoreentityendpoint', 'v1', function() {
-			console.log("Init : loaded");
-
-			gapi.client.scoreentityendpoint.insertScoreEntity({id:"3333",name:"TeamTrompette55", score:100}).execute(
-					function(resp) {
-						//console.log(resp);
-						$scope.testAjout(resp);
-					});		
-
-			gapi.client.scoreentityendpoint.listScoreEntity().execute(
-					function(resp) {
-						//console.log(resp);
-						$scope.test(resp);
-					});	
-
-		}, rootApi);
-	}
 
 }]);
 
