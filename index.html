@@ -7,12 +7,11 @@
     <link data-require="bootstrap-css@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
     <script>document.write('<base href="' + document.location + '" />');</script>
     <link rel="stylesheet" href="modern-business.css" />
-    <link rel="stylesheet" href="app.css" />
     <script data-require="angular.js@1.0.x" src="https://code.angularjs.org/1.0.8/angular.js" data-semver="1.0.8"></script>
     <script src="https://apis.google.com/js/client:plusone.js" type="text/javascript"></script>
     <script data-require="jquery@2.2.0" data-semver="2.2.0" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script data-require="bootstrap@3.3.6" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <meta name="google-signin-client_id" content="149865370621-ep07k9i24edon0krf12m34tmvc1naekn.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="149865370621-ep07k9i24edon0krf12m34tmvc1naekn.apps.googleusercontent.com">    
     <script src="app.js"></script> 
     
     <script type="text/javascript">
@@ -36,71 +35,12 @@
     }
 	var init = function(){
 		console.log("Init : called");
-		window.init();	
-		angular.element(document.getElementById('MainCtrl')).scope().$apply();
+		window.init();
 	}	
 	
-	$(function () {
-	    $('#hemicycle').highcharts({
-	        chart: {
-	            plotBackgroundColor: null,
-	            plotBorderWidth: 0,
-	            plotShadow: false
-	        },
-	        title: {
-	            text: ' ', // titre
-	            align: 'center',
-	            verticalAlign: 'middle',
-	            y: 40
-	        },
-	        tooltip: {
-	            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-	        },
-	        plotOptions: {
-	            pie: {
-	                dataLabels: {
-	                    enabled: true,
-	                    distance: -50,
-	                    style: {
-	                        fontWeight: 'bold',
-	                        color: 'white',
-	                        textShadow: '0px 1px 2px black'
-	                    }
-	                },
-	                startAngle: -90,
-	                endAngle: 90,
-	                center: ['50%', '75%']
-	            }
-	        },
-	        series: [{
-	            type: 'pie',
-	            name: 'Représentation au parlement',
-	            innerSize: '50%',
-	            data: [
-	                ['Extrême gauche',   53],
-	                ['PS',       201],
-	                ['Verts', 44],
-	                ['Centre',    59],
-	                ['Union de droite',     217],
-	                ['FN',     42],
-	                ['Autres',     135],
-	                {
-	                    name: 'Proprietary or Undetectable',
-	                    y: 0.2,
-	                    dataLabels: {
-	                        enabled: false
-	                    }
-	                }
-	            ]
-	        }]
-	    });
-	});
 	</script>
 	
     <script src="https://apis.google.com/js/client.js?onload=init"></script>
-    
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-	<script src="https://code.highcharts.com/modules/exporting.js"></script>
     
   </head>
 
@@ -109,9 +49,7 @@
     
     <div class="navTemplate"></div>
     
-    <div class="container">  
-    
-    	<div id="hemicycle" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div> 
+    <div class="container">		
      
       <!--  
       <table class="table">
