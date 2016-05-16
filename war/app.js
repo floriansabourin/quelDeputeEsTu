@@ -23,7 +23,7 @@ app.directive('footerTemplate', function(){
 });
 
 app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
-
+    
 	$scope.UserName = "Visiteur";
 	$scope.connecte = false;
 	$scope.accueil = true;
@@ -50,26 +50,37 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 	
 	$window.init = function (){
 		var rootApi = 'https://1-dot-nideputesnisoumises.appspot.com/_ah/api/';
-		gapi.client.load('apindns', 'v1', function() {
+		gapi.client.load('loiendpoint', 'v1', function() {
 			console.log("Init : loaded");
-			gapi.client.apindns.test().execute(
-					function(resp){
-						console.log("JS : test");
-					}
-			);
 			/*
-			gapi.client.scoreentityendpoint.insertScoreEntity({id:"3333",name:"TeamTrompette55", score:100}).execute(
+			gapi.client.loiendpoint.insertLoi({id:"1515151515",name:"Loi sur le Code du travail", 
+				description:"Révision de la loi sur le code du travail",nb_votes:"100",
+				votes_p:["Cricri","Monceaux","Pascalou"],votes_c:["Tranber","Bechet","Manu"],votes_a:["Florian","Romain","Denis"]}).execute(
 					function(resp) {
-						//console.log(resp);
-						$scope.testAjout(resp);
+						console.log(resp);
 					});		
-
-			gapi.client.scoreentityendpoint.listScoreEntity().execute(
+			
+			gapi.client.loiendpoint.listLoi().execute(
 					function(resp) {
-						//console.log(resp);
-						$scope.test(resp);
+						console.log(resp);
 					});	
-			*/
+			 */
+			console.log("--------|LOIS|--------");
+			$scope.lois = function() 
+		    {
+		      $http({
+		        method: 'POST',
+		        url: 'http://localhost:8888/ndns',
+		        headers: {'Content-Type': 'application/json'},
+		        data:  $scope.lois
+		      }).success(function (data) 
+		        {
+		          $scope.status=data;
+		        });
+		    };
+			
+		    console.log($scope.lois);
+		    console.log("---------------------");
 		}, rootApi);
 	}
 
