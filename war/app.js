@@ -1,4 +1,4 @@
-var app = angular.module('nideputenisoumises', []);
+var app = angular.module('nideputenisoumises', ["chart.js"]);
 
 app.directive('headTemplate', function(){
 	return{
@@ -33,6 +33,16 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 	$scope.affichageResultat = true;
 	$scope.compteur = 0;  
 	$scope.questions = [];
+	
+	
+	$scope.labels = ["% lois passées", "% lois rejetées", "% lois en cours"];
+  $scope.data = [37, 54, 9];
+	$scope.colors = ["#90ed7d", "#f7a35c", "#7cb5ec"];
+	
+	$scope.labels2 = ["Front national", "Les Républicains", "Centre","Parti Socialiste","Les Ecologistes","Parti Communiste"];
+  $scope.data2 = [12, 31, 9, 28, 3, 7];
+	$scope.colors2 = ["#3300CC", "#7cb5ec","#434348","#FF3300","#90ed7d","#f7a35c"];
+
 	
 	$window.init = function (){
 		var rootApi = 'https://1-dot-nideputesnisoumises.appspot.com/_ah/api/';
@@ -121,6 +131,7 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 			$scope.accueil = true;
 			$scope.partieVote = false;
 			$scope.affichageVote = false;
+			$scope.affichageResultat = true;
 			$scope.questions = genererLois();
 		}
 	}
@@ -183,6 +194,7 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 		$scope.compteur = 0;
 		$scope.affichageVote = true;
 		$scope.affichageFin = false;
+		$scope.affichageResultat = true;
 	}
 	
 	$scope.calculerResultat = function(){
