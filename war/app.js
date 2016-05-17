@@ -30,23 +30,9 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 	$scope.affichageVote = true;
 	$scope.affichageFin = true;
 	$scope.partieVote = true;
-	
-	$scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-	$scope.data = [300, 500, 100];
-
+	$scope.affichageResultat = true;
 	$scope.compteur = 0;  
-	$scope.questions = [
-	                    {id:"505", ordre:"1",vote: "",question:"Whats your (full) name?"},
-	                    {id:"402", ordre:"2",vote: "",question:"How old are you?"},
-	                    {id:"302", ordre:"3",vote: "",question:"Whats your Birthday?"},
-	                    {id:"111", ordre:"4",vote: "",question:"What starsign does that make it?"},
-	                    {id:"222", ordre:"5",vote: "",question:"Whats your favourite colour?"},
-	                    {id:"333", ordre:"6",vote: "",question:"Whats your lucky number?"},
-	                    {id:"444", ordre:"7",vote: "",question:"Do you have any pets?"},
-	                    {id:"555", ordre:"8",vote: "",question:"Where are you from?"},
-	                    {id:"666", ordre:"9",vote: "",question:"What starsign does that make it?"},
-	                    {id:"999", ordre:"10",vote: "",question:"How tall are you?"}
-	                    ];
+	$scope.questions = [];
 	
 	$window.init = function (){
 		var rootApi = 'https://1-dot-nideputesnisoumises.appspot.com/_ah/api/';
@@ -65,22 +51,6 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 						console.log(resp);
 					});	
 			 */
-			console.log("--------|LOIS|--------");
-			$scope.lois = function() 
-		    {
-		      $http({
-		        method: 'POST',
-		        url: 'http://localhost:8888/ndns',
-		        headers: {'Content-Type': 'application/json'},
-		        data:  $scope.lois
-		      }).success(function (data) 
-		        {
-		          $scope.status=data;
-		        });
-		    };
-			
-		    console.log($scope.lois);
-		    console.log("---------------------");
 		}, rootApi);
 	}
 
@@ -96,7 +66,7 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 		console.log("Methode : disconnectUser");
 		//alert(varaccess_token);
 		var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' + access_token;
-
+    /*
 		// Exécuter une requête GET asynchrone.
 		$.ajax({
 			type: 'GET',
@@ -115,6 +85,7 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 				// https://plus.google.com/apps
 			}
 		});
+		*/
 	};
 
 	$scope.majConnexion = function (name){	 
@@ -128,6 +99,7 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 			$scope.affichageVote = true;
 			$scope.affichageFin = true;
 			$scope.partieVote = true;			
+			$scope.affichageResultat = true;
 		}
 		$scope.UserName = name;
 	}
@@ -139,6 +111,7 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 			$scope.affichageVote = true;
 			$scope.affichageFin = true;
 			$scope.partieVote = true;
+			$scope.affichageResultat = true;
 		}
 	}
 
@@ -148,12 +121,39 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 			$scope.accueil = true;
 			$scope.partieVote = false;
 			$scope.affichageVote = false;
+			$scope.questions = genererLois();
 		}
+	}
+	
+	function genererLois() {
+	  var lois = [
+	              {id:"505",titre:"Sed ut tum ad senem senex de senectute, sic hoc libro ad amicum ",date:"25-03-2016",
+	              nb_votes:5,nb_nspp:0,votes_p:["PA1","PA2"],votes_c:["PA3","PA4"],votes_a:["PA5"]},
+                {id:"402",titre:"Amicissimus scripsi de amicitia. Tum est Cato locutus, quo erat nemo fere ",date:"25-03-2016",
+                nb_votes:4,nb_nspp:1,votes_p:["PA1","PA2"],votes_c:["PA3"],votes_a:["PA5"]},
+                {id:"302",titre:"Senior temporibus illis, nemo prudentior; nunc Laelius et sapiens",date:"25-03-2016",
+                nb_votes:3,nb_nspp:2,votes_p:["PA1"],votes_c:["PA4"],votes_a:["PA5"]},
+                {id:"111",titre:"Amicitiae gloria excellens de amicitia loquetur. Tu velim a me animum parumper avertas, Laelium loqui ipsum putes.",date:"25-03-2016",
+                nb_votes:4,nb_nspp:1,votes_p:["PA2"],votes_c:["PA3","PA4"],votes_a:["PA5"]},
+                {id:"222",titre:"Mucius ad socerum veniunt post mortem Africani",date:"25-03-2016",
+                nb_votes:5,nb_nspp:0,votes_p:["PA1","PA2"],votes_c:["PA3","PA4"],votes_a:["PA5"]},
+                {id:"333",titre:"Sermo oritur, respondet Laelius, cuius tota disputatio est de amicitia, quam legens te ipse cognosces.",date:"25-03-2016",
+                nb_votes:5,nb_nspp:0,votes_p:["PA1","PA2"],votes_c:["PA3","PA4"],votes_a:["PA5"]},
+                {id:"444",titre:"Siquis enim militarium vel honoratorum aut nobilis inter suos rumore ",date:"25-03-2016",
+                nb_votes:5,nb_nspp:0,votes_p:["PA1","PA2"],votes_c:["PA3","PA4"],votes_a:["PA5"]},
+                {id:"555",titre:"Tenus esset insimulatus fovisse partes hostiles, iniecto onere catenarum in ",date:"25-03-2016",
+                nb_votes:5,nb_nspp:0,votes_p:["PA1","PA2"],votes_c:["PA3","PA4"],votes_a:["PA5"]},
+                {id:"666",titre:"Modum beluae trahebatur et inimico urgente vel nullo, quasi sufficiente ",date:"25-03-2016",
+                nb_votes:2,nb_nspp:3,votes_p:["PA1"],votes_c:[],votes_a:["PA5"]},
+                {id:"999",titre:"Hoc solo, quod nominatus esset aut delatus aut postulatus capite vel ",date:"25-03-2016",
+                nb_votes:1,nb_nspp:4,votes_p:["PA1"],votes_c:[],votes_a:[]}
+                ];
+	  return lois;
 	}
 
 	$scope.oui = function (){
 		console.log("Methode : oui");
-		$scope.questions[$scope.compteur].vote = "ok";
+		$scope.questions[$scope.compteur].vote = "Pour";
 		$scope.compteur++;
 		if($scope.compteur == 10){
 			$scope.fin();
@@ -162,7 +162,7 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 
 	$scope.non = function (){
 		console.log("Methode : non");
-		$scope.questions[$scope.compteur].vote = "ko";
+		$scope.questions[$scope.compteur].vote = "Contre";
 		$scope.compteur++;
 		if($scope.compteur == 10){
 			$scope.fin();
@@ -171,7 +171,7 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 
 	$scope.nspp = function (){
 		console.log("Methode : nspp");
-		$scope.questions[$scope.compteur].vote = "nspp";
+		$scope.questions[$scope.compteur].vote = "Abstention";
 		$scope.compteur++;
 		if($scope.compteur == 10){
 			$scope.fin();
@@ -184,22 +184,16 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 		$scope.affichageVote = true;
 		$scope.affichageFin = false;
 	}
-
-	$scope.tabTest = [];
-
-	$scope.test= function(resp){
-		console.log("Methode : test");
-		$scope.tabTest = resp.items;
-		console.log($scope.tabTest);
-	};
-
-	$scope.testAjout = function(resp){
-		console.log("Methode : testAjout");
-		$scope.tabTest.push(resp);
-		console.log($scope.tabTest);
-	};
+	
+	$scope.calculerResultat = function(){
+	  console.log("Methode : calculerResultat");
+	  
+	  $scope.deputeProche = "Julien Aubert";
+	  $scope.partiProche = "Les Républicains";
+	  
+	  $scope.affichageFin = true;
+	  $scope.partieVote = true;
+	  $scope.affichageResultat = false;
+	}
 
 }]);
-
-
-
