@@ -6,7 +6,6 @@
     <title>Ni député ni soumises</title>
     <link data-require="bootstrap-css@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
     <script>document.write('<base href="' + document.location + '" />');</script>
-    <link rel="stylesheet" href="modern-business.css" />
     <script data-require="angular.js@1.0.x" src="https://code.angularjs.org/1.0.8/angular.js" data-semver="1.0.8"></script>
     <script src="https://apis.google.com/js/client:plusone.js" type="text/javascript"></script>
     <script data-require="jquery@2.2.0" data-semver="2.2.0" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -48,24 +47,10 @@
     
     <div class="navTemplate"></div>
     
+    <br>
+    <br>
+    
     <div class="container">		
-     
-      <!--  
-      <table class="table">
-	      <thead>
-	        <tr>
-	          <td>Identifiants</td>
-	          <td>Noms</td>
-	          <td>Score</td>
-	        </tr>
-	      </thead>
-	      <tr ng-repeat="t in tabTest | orderBy:'-score'">
-	        <td>{{t.id}}</td>
-	        <td>{{t.name}}</td>
-	        <td>{{t.score}}</td>
-	      </tr>
-     </table>
-      -->
       
       <!-- page d'authentification -->   
       <div class="row" ng-hide=connecte>
@@ -84,9 +69,12 @@
               Identifie toi avec ton compte Google pour accéder à l'application.
               <br/>
               <br/>
+              <!--
               <div id="bloc_page" align="center">
               	<div id="signinButton" class="g-signin2" data-onsuccess="onSignIn"></div>
               </div>
+              -->
+              <div class="btn btn-success" ng-click="connecte=true; accueil=false; UserName='Denis'">Connexion</div>
         	</div>
            </div>
          </div>
@@ -120,14 +108,16 @@
         </div>   
           
         <div class="row" ng-hide=affichageVote>
-          <h3>Loi n°{{compteur+1}} :</h3>
+          <h3>Loi n°{{compteur+1}} : votée le {{questions[compteur].date}} </h3>
           <br/>
-          {{questions[compteur].question}}
+          {{questions[compteur].titre}}
           <br/>
           <br/>
-          <button class="btn btn-success" ng-click="oui()">Oui</button>
-          <button class="btn btn-primary" ng-click="nspp()">S'abstenir</button>
-          <button class="btn btn-danger" ng-click="non()">Non</button>
+          <div style="text-align: center">
+            <button class="btn btn-success" ng-click="oui()">Oui</button>
+            <button class="btn btn-primary" ng-click="nspp()">S'abstenir</button>
+            <button class="btn btn-danger" ng-click="non()">Non</button>
+          </div>
         </div>
         
         
@@ -136,16 +126,39 @@
           <table class="table">
             <thead>
               <tr>
-                <td>Questions</td>
-                <td>Vote</td>
+                <td>Question</td>
+                <td>Ton vote</td>
+                <td>% pour</td>
+                <td>% contre</td>
+                <td>% abstention</td>
               </tr>
             </thead>
             <tr ng-repeat="res in questions">
-              <td>Question {{res.ordre}}</td>
+              <td>Loi n°{{$index + 1}}</td>
               <td>{{res.vote}}</td>
+              <td>{{res.votes_p.length/res.nb_votes*100 | number:0 }}</td>
+              <td>{{res.votes_c.length/res.nb_votes*100 | number:0 }}</td>
+              <td>{{res.votes_a.length/res.nb_votes*100 | number:0 }}</td>
             </tr>
           </table>
+          <div style="text-align: center">
+            <button class="btn btn-success" ng-click="calculerResultat()">Voir le résultat</button>
+          </div>
         </div>
+        
+        
+        <div class="row" ng-hide=affichageResultat>
+          <h1 class="page">
+                  Résultats
+          </h1>
+          <h3>D'après les votes, vous vous rapprochez de {{ deputeProche }} !</h3>
+          <h3>Votre parti de prédilection est donc : {{ partiProche }}</h3>
+          
+        </div>
+        
+        
+        
+        
         
       </div>
       
