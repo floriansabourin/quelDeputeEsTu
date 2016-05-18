@@ -87,6 +87,49 @@ public class LoiEndpoint {
 		}
 		return loi;
 	}
+	
+	
+	@SuppressWarnings({ "unchecked", "unused" })
+	@ApiMethod(name = "listLoi")
+	public CollectionResponse<Loi> search (
+			@Nullable @Named("cursor") String cursorString,
+			@Nullable @Named("limit") Integer limit) {
+
+		PersistenceManager mgr = null;
+		Cursor cursor = null;
+		List<Loi> execute = null;
+
+		try {
+			mgr = getPersistenceManager();
+			Query query = mgr.newQuery(Loi.class);
+			if (cursorString != null && cursorString != "") {
+				cursor = Cursor.fromWebSafeString(cursorString);
+				HashMap<String, Object> extensionMap = new HashMap<String, Object>();
+				extensionMap.put(JDOCursorHelper.CURSOR_EXTENSION, cursor);
+				query.setExtensions(extensionMap);
+			}
+
+			if (limit != null) {
+				int nb = (int)(Math.random() * 201);
+				query.setRange(nb, limit);
+			}
+
+			execute = (List<Loi>) query.execute();
+			cursor = JDOCursorHelper.getCursor(execute);
+			if (cursor != null)
+				cursorString = cursor.toWebSafeString();
+
+			// Tight loop for fetching all entities from datastore and accomodate
+			// for lazy fetch.
+			for (Loi obj : execute)
+				;
+		} finally {
+			mgr.close();
+		}
+
+		return CollectionResponse.<Loi> builder().setItems(execute)
+				.setNextPageToken(cursorString).build();
+	}
 
 	/**
 	 * This inserts a new entity into App Engine datastore. If the entity already
