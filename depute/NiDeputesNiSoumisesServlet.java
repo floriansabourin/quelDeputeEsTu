@@ -41,7 +41,7 @@ public class NiDeputesNiSoumisesServlet extends HttpServlet {
 		
 		log.info("AMO10_deputes_actifs_mandats_actifs_organes_XIV.xml ok : creation des deputes");
 		 
-		/*
+		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();	
 		for(int i=0; i<deputes.size();i++){
 			Transaction txn = datastore.beginTransaction();	
@@ -84,7 +84,7 @@ public class NiDeputesNiSoumisesServlet extends HttpServlet {
 				 }
 			}
 		}
-		*/
+		
 		log.info("Donnees inserees dans le datastore");
 	}
 }
