@@ -12,12 +12,13 @@
     <script data-require="bootstrap@3.3.6" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <meta name="google-signin-client_id" content="149865370621-ep07k9i24edon0krf12m34tmvc1naekn.apps.googleusercontent.com">    
     
-    <script src="chart.js"></script> 
-    <script src="angular-chart.js"></script>
+    <script src="js/chart.js"></script> 
+    <script src="js/angular-chart.js"></script>
+    <script src="js/app.js"></script> 
     
-    <link rel="stylesheet" type="text/css" href="angular-chart.css">
+    <link rel="stylesheet" type="text/css" href="css/angular-chart.css">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
     
-    <script src="app.js"></script> 
     
     <script type="text/javascript">
     var onSignIn = function (googleUser){
@@ -97,8 +98,9 @@
               </h5>
           </div>
       	 </div>
-         <div class="row" ng-hide=accueil>         				
-			      <canvas id="doughnut" class="chart chart-pie" chart-data="data" chart-colours="colors" chart-labels="labels"></canvas>
+         <div class="row" ng-hide=accueil> 
+         	<img style="text-align: center" src="img/assnat.png">       				
+			<canvas id="doughnut" class="chart chart-pie" chart-data="data" chart-colours="colors" chart-labels="labels"></canvas>
             <h5 style="text-align: center">Répartition du résultat des votes sur les lois de 2012 à 2015</h5>
             <hr>
             <canvas id="doughnut2" class="chart chart-doughnut" chart-data="data2" chart-colours="colors2" chart-labels="labels2"></canvas>
@@ -169,7 +171,7 @@
           <br>
           <div style="text-align: center">
             <h3>D'après les votes, vous vous rapprochez de <span style="font-weight:bold;">{{ deputeProche }}</span> !</h3>
-            <h3>Votre parti de prédilection est donc <span style="font-weight:bold;">{{ partiProche }}</span></h3>
+            <h3>Votre parti de prédilection est donc <span style="font-weight:bold;">{{ partiProche }}</span>.</h3>
           </div>
           <br>
           <br>
