@@ -47,20 +47,12 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 	$window.init = function (){
 		var rootApi = 'https://1-dot-nideputesnisoumises.appspot.com/_ah/api/';
 		gapi.client.load('loiendpoint', 'v1', function() {
-			console.log("Init : loaded");
-			/*
-			gapi.client.loiendpoint.insertLoi({id:"1515151515",name:"Loi sur le Code du travail", 
-				description:"Révision de la loi sur le code du travail",nb_votes:"100",
-				votes_p:["Cricri","Monceaux","Pascalou"],votes_c:["Tranber","Bechet","Manu"],votes_a:["Florian","Romain","Denis"]}).execute(
+			console.log("Init : loaded");	
+			gapi.client.loiendpoint.search({limit:10}).execute(			  
 					function(resp) {
-						console.log(resp);
-					});		
-			
-			gapi.client.loiendpoint.listLoi().execute(
-					function(resp) {
-						console.log(resp);
+						$scope.questions = resp.items;
+						console.log($scope.questions);
 					});	
-			 */
 		}, rootApi);
 	}
 
@@ -127,16 +119,16 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
 
 	$scope.voter = function (){	 
 		console.log("Methode : voter");
-		if($scope.connecte){
+		if($scope.connecte){			
 			$scope.accueil = true;
 			$scope.partieVote = false;
 			$scope.affichageVote = false;
-			$scope.affichageResultat = true;
-			$scope.questions = genererLois();
+			$scope.affichageResultat = true; 	
 		}
 	}
 	
-	function genererLois() {
+	$scope.genererLois = function(){
+		/*
 	  var lois = [
 	              {id:"505",titre:"Sed ut tum ad senem senex de senectute, sic hoc libro ad amicum ",date:"25-03-2016",
 	              nb_votes:5,nb_nspp:0,votes_p:["PA1","PA2"],votes_c:["PA3","PA4"],votes_a:["PA5"]},
@@ -159,7 +151,8 @@ app.controller('MainCtrl', ['$scope', '$window', function ($scope, $window) {
                 {id:"999",titre:"Hoc solo, quod nominatus esset aut delatus aut postulatus capite vel ",date:"25-03-2016",
                 nb_votes:1,nb_nspp:4,votes_p:["PA1"],votes_c:[],votes_a:[]}
                 ];
-	  return lois;
+	  */
+	  
 	}
 
 	$scope.oui = function (){
